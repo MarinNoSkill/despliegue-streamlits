@@ -90,11 +90,22 @@ data_preparada.head()
 
 """# Predicción"""
 
-#Hacemos la predicción con el Random Forest
-Y_pred = modelo.predict(data_preparada)
-print(Y_pred)
 
-#Se convierte 0/1 a la etiqueta original (No/Yes)
-Y_pred_etiqueta = labelencoder.inverse_transform(Y_pred)
-data['Prediccion']=Y_pred_etiqueta
-data.head()
+#Mostrar la predicción en la interfaz al presionar el botón
+if st.button('🔍 Predecir'):
+
+    #Hacemos la predicción con el Random Forest
+    Y_pred = modelo.predict(data_preparada)
+
+    #Se convierte 0/1 a la etiqueta original (No/Yes)
+    Y_pred_etiqueta = labelencoder.inverse_transform(Y_pred)
+    data['Prediccion'] = Y_pred_etiqueta
+
+    #Resultado en color
+    if Y_pred_etiqueta[0] == 'Yes':
+        st.error('🚨 El modelo predice RIESGO de ataque al corazón')
+    else:
+        st.success('✅ El modelo predice BAJO riesgo de ataque al corazón')
+
+    #Tabla con la predicción
+    st.dataframe(data)
