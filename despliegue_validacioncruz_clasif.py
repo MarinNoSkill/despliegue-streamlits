@@ -30,8 +30,7 @@ modelo, labelencoder, variables, min_max_scaler = pickle.load(open(filename, 'rb
 #data = pd.read_csv("ataque_corazon-datosFuturos.csv")
 #data.head()
 
-#Interfaz gráfica
-!pip install streamlit
+
 
 #Se crea interfaz gráfica con streamlit para captura de los datos
 
